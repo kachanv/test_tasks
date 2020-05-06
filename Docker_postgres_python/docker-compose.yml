@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  my_postgres_sql:
+    build:
+      context: .
+    container_name: my_postgres_sql_container
+    ports:
+      - "5432:5432"
+  my_python:
+    build:
+      context: .
+      dockerfile: Dockerfile-python
+    container_name: my_python_container
+    links:
+      - my_postgres_sql
+    depends_on:
+      - my_postgres_sql
